@@ -37,3 +37,25 @@ if len(data_numerica_general) > 0:
         csv_writer.writerow([item])
     with open("lastdate.txt",'w') as df:
         df.write(str(today))
+    
+    from datetime import date
+    todate = str(date.today())
+    list_length = len(data_numerica_general)
+    start_index = list_length - 100
+    last_100 = data_numerica_general[start_index:]
+    elements_per_sublist = (len(last_100) // 5)
+    sublists = []
+
+    for i in range(0, len(last_100), elements_per_sublist):
+        sublist = last_100[i:i+elements_per_sublist]
+        sublists.append(sublist)
+    output_dict = {
+    "Nocturno": sublists[0],
+    "De la tarde": sublists[1],
+    "De la siesta": sublists[2],
+    "Vespertino": sublists[3],
+    "Matutino": sublists[4],
+}
+    
+    with open(f"Winners_{todate}.json", "w") as outfile:
+        json.dump(output_dict, outfile, indent=4)

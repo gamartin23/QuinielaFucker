@@ -46,5 +46,5 @@ output_dict = {
 
 from datetime import date
 todate = str(date.today())
-with open(f"loterias_{todate}.json", "w") as outfile:
+with open(f"Predicted_{todate}.json", "w") as outfile:
     json.dump(output_dict, outfile, indent=4)
