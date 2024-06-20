@@ -33,7 +33,6 @@ if len(data_numerica_general) > 0:
     with open("processed_data.csv", "a", newline="") as csvfile:
         csv_writer = csv.writer(csvfile)
     
-    # Iterate through the list and write each item to a new row in column 1
     for item in data_numerica_general:
         csv_writer.writerow([item])
     with open("lastdate.txt",'w') as df:

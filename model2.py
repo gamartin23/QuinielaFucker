@@ -1,42 +1,26 @@
 import pandas as pd
 import random
 import numpy as np
-from sklearn.naive_bayes import MultinomialNB
 import json
 
 def generate_predictions(num_instances, num_predictions):
-    # Create empty list to store all instances
     all_predictions = []
 
     for _ in range(num_instances):
-        # Create an empty list for each instance
         instance_predictions = []
-
-        # Generate num_predictions unique random numbers
         while len(instance_predictions) < num_predictions:
             random_number = np.random.choice(numeros_validos)
             if random_number not in instance_predictions:
                 instance_predictions.append(random_number)
-
-        # Sort the predictions
         instance_predictions.sort()
-
-        # Append the sorted predictions to the all_predictions list
         all_predictions.append(instance_predictions)
 
     return all_predictions
 
 def process_predictions(predictions):
-    # Flatten all predictions into a single list
     flat_predictions = [item for sublist in predictions for item in sublist]
-
-    # Pad numbers with leading zeros to ensure 4 digits
     padded_predictions = [str(p).zfill(4) for p in flat_predictions]
-
-    # Randomize the order of predictions
     random.shuffle(padded_predictions)
-
-    # Split the randomized list into 5 sublists
     split_size = int(len(padded_predictions) / 5)
     processed_lists = [padded_predictions[i:i+split_size] for i in range(0, len(padded_predictions), split_size)]
 
